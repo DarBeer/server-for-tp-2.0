@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="../../assets/css/partials-messages.css">
+
+<% if (typeof errors != 'undefined') { %>
+    <div class="toast">
+        <% errors.forEach(function(error) { %> 
+            <div class="block block-error">
+                <p><%= error.msg %></p>
+            </div>
+        <% }); %> 
+    </div>
+<% } %>
+
+<% if (success_msg != '') { %>
+    <div class="toast">
+        <div class="block block-success">
+            <p><%= success_msg %></p>
+        </div>
+    </div>
+<% } %> 
+
+<% if (error_msg != '') { %>
+    <div class="toast">
+        <div class="block block-error">
+            <p><%= error_msg %></p>
+        </div>
+    </div>
+<% } %> 
+
+<% if (error != '') { %>
+    <div class="toast">
+        <div class="block block-error">
+            <p><%= error %></p>
+        </div>
+    </div>
+<% } %> 

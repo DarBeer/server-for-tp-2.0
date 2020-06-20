@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="../assets/css/login.css">
+
+<div class="wrapper">
+    <div class="container">
+        <div class="col">
+            <img src="../assets/img/poster-for-login.png" alt="citty">
+        </div>
+        <div class="col">
+            <div class="login-form">
+                <h3>Авторизация</h3>
+                <form action="login" method="POST">
+                    <div>
+                        <label for="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="Enter Email"
+                        />
+                    </div>
+                    <div>
+                        <label for="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-control"
+                            placeholder="Enter Password"
+                        />
+                    </div>
+                    <button type="submit">Войти</button>
+                    <!-- <a class="to-back" href="/users/register">Регистрация</a> -->
+                </form>
+            </div>
+        </div>    
+    </div>
+</div>
+
+<%- include('partials/messages'); %>

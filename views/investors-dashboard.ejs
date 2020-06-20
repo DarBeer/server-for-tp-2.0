@@ -1,0 +1,99 @@
+<!-- CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" href="../assets/css/dashboard.css">
+<!-- Icons -->
+<link rel="stylesheet" href="../assets/fontawesome-free-5.13.0-web/css/all.css">
+
+<!-- Wrapper -->
+<div class="wrapper">
+    <nav class="navbar navbar-dark sticky-top custom-bg-green flex-md-nowrap p-0">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">АДМИН ПАНЕЛЬ</a>
+        <input type="text" placeholder="Поиск" aria-label="Search" class="form-control form-control-dark w-100">
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a href="/users/logout" class="nav-link">Выйти</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+        <nav class="col-md-2 d-none d-md-block sidebar-sticky-custom-bg-green sidebar">
+            <div class="sidebar-sticky" style="min-height: calc(100vh - 40px);">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/articles">
+                            <i class="far fa-newspaper"></i> 
+                            Ститьи
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/services">
+                            <i class="far fa-handshake"></i> 
+                            Услуги
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/dashboard/investors">
+                            <i class="fas fa-money-check-alt"></i> 
+                            Инвесторы
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/klasters">
+                            <i class="far fa-sticky-note"></i> 
+                            Кластер
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                <h1 class="h2">Инвесторы</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="mr-2">
+                        <a class="btn btn-sm btn-outline-secondary" href="/dashboard/investors/add">
+                            <i class="fas fa-plus"></i>
+                            Добавить
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <% if (typeof investors != 'undefined') { %>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                        <tr>
+                            <th>Изображение</th>
+                            <th>Инвестор</th>
+                            <th>Ссылка</th>
+                            <th>Редактировать</th>
+                            <th>Удалить</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                            <% investors.forEach(function(investor) { %> 
+                                <tr>
+                                    <td style="width: 20%;"><img class="img-fluid" src="<%= investor.urlImage %>" alt="<%= investor.urlImage %>"></td>
+                                    <td><%= investor.name %></td>
+                                    <td class="text-justify"><%= investor.urlToInv %></td>
+                                    <td class="text-center align-middle"><a href="/dashboard/investors/edit/<%= investor._id %>"><i class="fas fa-pencil-alt fa-2x"></i></i></a></td>
+                                    <td class="text-center align-middle"><a href="/dashboard/investors/del/<%= investor._id %>"><i class="fas fa-trash fa-2x"></i></a></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                    </div>
+              <% } %>
+            </main>
+          </div>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>

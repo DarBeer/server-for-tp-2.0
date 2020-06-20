@@ -1,0 +1,27 @@
+.toast {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.block {
+    margin: .5rem;
+    padding: .5rem;
+    width: 20rem;
+}
+
+.block > p {
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    font-weight: 300;
+    font-size: .92rem;
+}
+
+.block-error {
+    background: #ac2e2e;
+}
+
+.block-success {
+    background: #2eac5e;
+}

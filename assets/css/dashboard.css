@@ -1,0 +1,58 @@
+.sidebar-sticky-custom-bg-green {
+    background: #369e59;
+    padding: 0 !important;
+}
+
+.custom-bg-green {
+    background: #278145;
+}
+
+.custom-bg-green > input {
+    background: #369e59;
+    color: #ffffff;
+    border-radius: 0;
+    outline: none;
+    border: none;
+}
+
+.custom-bg-green > input:focus {
+    background: #369e59;
+    color: #ffffff;
+    border-radius: 0;
+    outline: none;
+    border: none;
+}
+
+.custom-bg-green > input::-moz-placeholder { 
+    color: #ffffffd0; 
+}
+.custom-bg-green > input::-webkit-input-placeholder { 
+    color: #ffffffd0; 
+}
+
+a {
+    color: #ffffffd0;
+}
+
+a:hover {
+    color: #ffffff;
+}
+
+td > a {
+    color: #747474;
+}
+
+td > a:hover {
+    color: #616161;
+}
+
+input {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.active {
+    font-weight: bold;
+    background: #ffffff42;
+    color: #ffffff;
+}

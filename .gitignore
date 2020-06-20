@@ -1,0 +1,11 @@
+# uploading files
+/assets/img/articles/
+/assets/img/investors/
+/assets/img/klasters/
+/assets/img/services/
+
+# configuration files
+/config/
+
+# node_modules
+/node_modules
