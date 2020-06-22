@@ -1,0 +1,136 @@
+<!-- CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" href="/assets/css/dashboard.css">
+<!-- Icons -->
+<link rel="stylesheet" href="/assets/fontawesome-free-5.13.0-web/css/all.css">
+
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<!-- Wrapper -->
+<div class="wrapper">
+    <nav class="navbar navbar-dark sticky-top custom-bg-green flex-md-nowrap p-0">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">АДМИН ПАНЕЛЬ</a>
+        <input type="text" placeholder="Поиск" aria-label="Search" class="form-control form-control-dark w-100">
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a href="/users/logout" class="nav-link">Выйти</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block sidebar-sticky-custom-bg-green sidebar">
+                <div class="sidebar-sticky" style="min-height: calc(100vh - 40px);">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard/articles">
+                                <i class="far fa-newspaper"></i> 
+                                Ститьи
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard/services">
+                                <i class="far fa-handshake"></i> 
+                                Услуги
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard/investors">
+                                <i class="fas fa-money-check-alt"></i> 
+                                Инвесторы
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/dashboard/klasters">
+                                <i class="far fa-sticky-note"></i> 
+                                Кластер
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+    
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <form method="POST" action="">
+                            <div class="form-group">
+                              <label for="heading">Заголовок *</label>
+                              <input 
+                                id="heading"
+                                name="heading"
+                                type="text" 
+                                class="form-control"
+                                placeholder="Заголовок"
+                                    value="<%- typeof heading != 'undefined' ? heading : '' %>"
+                              >
+                            </div>
+                            <div class="form-group">
+                              <label for="description">Содержание</label>
+                              <input 
+                                id="description"
+                                name="description"
+                                type="hidden" 
+                                class="form-control"
+                                placeholder="Содержание"
+                                    value="<%- typeof description != 'undefined' ? description : '' %>"
+                              >
+                              <div id="editor-container">
+                                <%- typeof description != 'undefined' ? description : '' %>
+                              </div>
+                            </div>
+        
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                          </form>
+                    </div>
+                </div>
+                
+            </main>
+        </div>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+<script>
+    var quill = new Quill('#editor-container', {
+    modules: {
+    toolbar: [
+                ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+                ['blockquote', 'code-block'],
+
+                [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+                [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+                [{ 'direction': 'rtl' }],                         // text direction
+
+                [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+                [{ 'font': [] }],
+                [{ 'align': [] }],
+
+                ['clean']                                         // remove formatting button
+        ]
+    },
+    placeholder: 'Содержание',
+    theme: 'snow'
+    });
+
+    var form = document.querySelector('form');
+    form.onsubmit = function() {
+        // Populate hidden form on submit
+        var description = document.querySelector('input[name=description]');
+        description.value = quill.root.innerHTML;
+
+        return true;
+
+    };
+
+</script>

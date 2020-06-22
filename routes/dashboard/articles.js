@@ -56,7 +56,11 @@ router.post('/edit/:id', ensureAuthenticated, upload.single('urlImage'), (req, r
         shortDescription,
         imagesForDescription 
     } = req.body;
-    const urlImage = "http://localhost/assets/img/articles/" + req.file.originalname;
+    if (req.file != 'undefined') {
+        console.log(req.file);
+        const urlImage = "http://localhost/assets/img/articles/" + req.file.originalname;
+    }
+    
 
     let errors = [];
 
@@ -108,7 +112,11 @@ router.post('/add', ensureAuthenticated, upload.single('urlImage'), (req, res) =
         shortDescription,
         imagesForDescription 
     } = req.body;
-    const urlImage = "http://localhost/assets/img/articles/" + req.file.originalname;
+    if (!req.file == 'indefined') {
+        const urlImage = "http://localhost/assets/img/articles/" + req.file.originalname;
+    } else {
+        const urlImage = "http://loclahost/assets/img/noimage.png"
+    }
     let errors = [];
 
     // Check required fields

@@ -108,7 +108,12 @@ router.post('/add', ensureAuthenticated, upload.single('imgUrl'), (req, res) => 
         shortDescription,
         imagesForDescription 
     } = req.body;
-    const imgUrl = "http://localhost/assets/img/services/" + req.file.originalname;
+    if (req.file != 'undefined') {
+        console.log(req.file);
+        const imgUrl = "http://localhost/assets/img/articles/" + req.file.originalname;
+    } else {
+        const imgUrl = "http://localhost/assets/img/noimage.png"
+    }
     let errors = [];
 
     // Check required fields
