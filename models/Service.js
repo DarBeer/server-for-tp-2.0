@@ -7,6 +7,7 @@ const Service = new ServiceSchema({
     heading: String,
     shortDescription: String,
     description: String,
+    visible: Boolean,
     imgDescription: [{
         imgUrl: String
     }]

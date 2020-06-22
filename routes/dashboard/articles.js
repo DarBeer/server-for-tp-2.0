@@ -36,7 +36,12 @@ router.get('/', ensureAuthenticated, (req, res) => {
 router.get('/edit/:id', ensureAuthenticated, (req, res) => {
     Article.findById({ _id: req.params.id })
         .then(article => {
-            res.render('article-page-dashboard', { article });
+            heading = article.heading;
+            description = article.description;
+            shortDescription = article.shortDescription;
+            imagesForDescription = article.imagesForDescription;
+            urlImage = article.urlImage;
+            res.render('article-page-dashboard', { heading, description, shortDescription, imagesForDescription, urlImage });
         })
         .catch(err => {
             console.log(err)
@@ -44,17 +49,7 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
 });
 
 // Edit Article Handle
-router.post('/edit/:id', ensureAuthenticated, (req, res) => {
-    
-});
-
-// Render New Article Page
-router.get('/add', ensureAuthenticated, (req, res) => {
-    res.render('article-page-dashboard');
-});
-
-// Add New Article Handle
-router.post('/add', ensureAuthenticated, upload.single('urlImage'), (req, res) => {
+router.post('/edit/:id', ensureAuthenticated, upload.single('urlImage'), (req, res) => {
     const { 
         heading, 
         description, 
@@ -71,15 +66,66 @@ router.post('/add', ensureAuthenticated, upload.single('urlImage'), (req, res) =
     }
 
     if (errors.length > 0) {
+        res.render('article-page-dashboard', { 
+            errors, 
+            heading, 
+            description, 
+            shortDescription,
+            imagesForDescription,
+            urlImage
+        });
+    } else {
+
+        Article.findByIdAndUpdate(
+            { _id: req.params.id }, 
+            { 
+                heading: heading,
+                description: description, 
+                shortDescription: shortDescription, 
+                urlImage: urlImage, 
+                imagesForDescription: imagesForDescription } )
+        .then(article => {
+            req.flash('success_msg', 'Статья обновлена!');
+            res.redirect('/dashboard/articles');
+        })
+        .catch(err => console.log(err));
+    }
+
+    
+});
+
+// Render New Article Page
+router.get('/add', ensureAuthenticated, (req, res) => {
+    urlImage = '/assets/img/noimage.png'
+    res.render('article-page-dashboard', { urlImage });
+});
+
+// Add New Article Handle
+router.post('/add', ensureAuthenticated, upload.single('urlImage'), (req, res) => {
+    const { 
+        heading, 
+        description, 
+        shortDescription,
+        imagesForDescription 
+    } = req.body;
+    const urlImage = "http://localhost/assets/img/articles/" + req.file.originalname;
+    let errors = [];
+
+    // Check required fields
+    if (!heading || !shortDescription) {
+        errors.push({ msg: 'Заполните обязательные поля (*)' });
+    }
+
+    if (errors.length > 0) {
         res.render('article-page-dashboard', { errors, heading, description, shortDescription });
     } else {
         const newArticle = new Article ({
             heading, 
             description, 
             shortDescription, 
-            urlImage, 
+            urlImage,
             imagesForDescription
-    });
+        });
     
         newArticle.save()
             .then(article => {

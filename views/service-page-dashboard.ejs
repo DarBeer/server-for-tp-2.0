@@ -24,7 +24,7 @@
                 <div class="sidebar-sticky" style="min-height: calc(100vh - 40px);">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="/dashboard/articles">
+                            <a class="nav-link" href="/dashboard/articles">
                                 <i class="far fa-newspaper"></i> 
                                 Ститьи
                             </a>
@@ -35,7 +35,7 @@
                                 Услуги
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link" href="/dashboard/investors">
                                 <i class="fas fa-money-check-alt"></i> 
                                 Инвесторы
@@ -92,15 +92,15 @@
                               </div>
                             </div>
                             <div class="form-group">
-                              <label for="urlImage">Главное изображение</label>
-                              <input class="btn btn-outline-secondary" name="urlImage" type="file" accept="image/*" onchange="uploadImg()" class="form-control-file" id="urlImage">
+                              <label for="imgUrl">Главное изображение</label>
+                              <input class="btn btn-outline-secondary" name="imgUrl" type="file" accept="image/*" onchange="uploadImg()" class="form-control-file" id="imgUrl">
                             </div>
         
                             <button type="submit" class="btn btn-primary">Сохранить</button>
                           </form>
                     </div>
                     <div class="col-md-4 col-sm-12">
-                        <img class="img-fluid" style="background-color: #cccccc;" src="<%= urlImage %> " alt="<%= urlImage %>">
+                        <img class="img-fluid" style="background-color: #cccccc;" src="<%- typeof imgUrl != 'undefined' ? imgUrl : '' %> " alt="<%- typeof imgUrl != 'undefined' ? imgUrl : '' %>">
                     </div>
                 </div>
                 

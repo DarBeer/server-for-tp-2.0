@@ -1,0 +1,126 @@
+<!-- CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" href="/assets/css/dashboard.css">
+<!-- Icons -->
+<link rel="stylesheet" href="/assets/fontawesome-free-5.13.0-web/css/all.css">
+
+<!-- Wrapper -->
+<div class="wrapper">
+    <nav class="navbar navbar-dark sticky-top custom-bg-green flex-md-nowrap p-0">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">АДМИН ПАНЕЛЬ</a>
+        <input type="text" placeholder="Поиск" aria-label="Search" class="form-control form-control-dark w-100">
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a href="/users/logout" class="nav-link">Выйти</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block sidebar-sticky-custom-bg-green sidebar">
+                <div class="sidebar-sticky" style="min-height: calc(100vh - 40px);">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard/articles">
+                                <i class="far fa-newspaper"></i> 
+                                Ститьи
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard/services">
+                                <i class="far fa-handshake"></i> 
+                                Услуги
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/dashboard/investors">
+                                <i class="fas fa-money-check-alt"></i> 
+                                Инвесторы
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard/klasters">
+                                <i class="far fa-sticky-note"></i> 
+                                Кластер
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+    
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                <div class="row">
+                    <div class="col-sm-12 col-md-8">
+                        <form id="investor-form" method="POST" action="/dashboard/investors/add">
+                            <div class="form-group">
+                              <label for="name">Название</label>
+                              <input 
+                                id="name"
+                                name="name"
+                                type="text" 
+                                class="form-control"
+                                placeholder="Заголовок"
+                                    value="<%- typeof name != 'undefined' ? name : '' %>"
+                              >
+                            </div>
+                            <div class="form-group">
+                              <label for="urlToInv">Ссылка на инвестора *</label>
+                              <input 
+                                id="urlToInv"
+                                name="urlToInv"
+                                type="text" 
+                                class="form-control"
+                                placeholder="Короткое описание"
+                                    value="<%- typeof urlToInv != 'undefined' ? urlToInv : '' %>"
+                              >
+                            </div>
+                            <input type="hidden" name="urlImage" id="urlImage" value="<%- typeof urlImage != 'undefined' ? urlImage : '' %>">
+                            <button onclick="" class="btn btn-primary">Сохранить</button>
+                          </form>
+                    </div>
+                    <div class="col-sm-12 col-md-4">
+                        <div class="row">
+                            <div class="col">
+                                <form id="img-form" method="POST" action="/dashboard/investors/upload" enctype="multipart/form-data">
+                                    <input type="file" accept="image/*" name="Image" id="Image" onchange="postFile()" value="<%- typeof img != 'undefined' ? img : '' %>">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mt-3">
+                                <img class="img-fluid" style="background-color: #cccccc;" src="/assets/img/invesrots/<%= urlImage %> " alt="<%= urlImage %>">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+<script>
+    function postFile() {
+        var img = document.querySelector('input[name=Image]');
+        var imgPath = document.querySelector('input[name=urlImage]');
+        
+        imgPath.value = img.files[0].name;
+
+        var form = document.getElementById('img-form');
+        document.body.append(form);
+
+        form.submit();
+    }
+
+    function submit() {
+        var form = document.getElementById('investor-form');
+
+        document.body.append(form);
+
+        form.submit();
+    }
+</script>

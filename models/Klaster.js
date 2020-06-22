@@ -6,6 +6,7 @@ const Klaster = new KlasterSchema({
     name: String,
     description: String,
     date: String,
+    visible: Boolean,
     imgDescription: [{
         imgUrl: String
     }]

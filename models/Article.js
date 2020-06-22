@@ -21,6 +21,7 @@ const Article = new ArticleSchema({
     date: {
         type: String
     },
+    visible: Boolean,
     imagesForDescription: [{
          urlImage: {
             type: String

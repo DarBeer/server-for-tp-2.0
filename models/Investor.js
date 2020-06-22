@@ -5,7 +5,8 @@ const InvestorSchema = mongoose.Schema;
 const Investor = new InvestorSchema({
     name: String,
     urlImage: String,
-    urlToInv: String
+    urlToInv: String,
+    visible: Boolean
 },{
     collection: 'investors'
 });
